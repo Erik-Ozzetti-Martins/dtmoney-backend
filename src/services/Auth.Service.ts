@@ -1,7 +1,6 @@
 import AppError from 'AppError';
 import { compare, hash } from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
-import { User } from 'entities/User';
 import UserRepository from 'repositories/User.Repository';
 import authConfig from '../config/auth';
 import { v4 as uuidV4 } from 'uuid';
@@ -22,6 +21,9 @@ interface IResponse {
   token: string;
   refresh_token: string;
 }
+interface IRes {
+  user: UserDto;
+}
 
 interface IPayload {
   sub: string;
@@ -30,7 +32,6 @@ interface IPayload {
 
 class AuthService {
   public async login({ email, password }: IRequest): Promise<IResponse> {
-    console.log(email, password);
     const userRepository = getCustomRepository(UserRepository);
 
     const dateJs = new DateJs();
@@ -72,7 +73,7 @@ class AuthService {
       refresh_token,
     };
   }
-  public async register({ name, email, password }: IRequest): Promise<User> {
+  public async register({ name, email, password }: IRequest): Promise<IRes> {
     const userRepository = getCustomRepository(UserRepository);
 
     const emailExists = await userRepository.findByEmail(email);
@@ -89,7 +90,7 @@ class AuthService {
     });
 
     await userRepository.save(user);
-    return user;
+    return { user: new UserDto(user) };
   }
 
   async refreshToken(token: string): Promise<string> {
@@ -109,7 +110,7 @@ class AuthService {
     }
     await usersTokensRepository.deleteById(userToken.id);
 
-    const refresh_token = sign({ email }, authConfig.jwt.secret_refreshToken, {
+    const refresh_token = sign({ email }, authConfig.jwt.secret, {
       subject: sub,
       expiresIn: authConfig.jwt.expires_in_refresh_token,
     });
@@ -151,12 +152,12 @@ class AuthService {
 
     const variables = {
       name: user.name,
-      link: `http://localhost:3333/auth/password/reset?token=${token} `,
+      link: `http://localhost:3000/password/reset?token=${token} `,
     };
 
     await etherealMailProvider.sendMail(
       email,
-      'Recuperação  de senha ',
+      'Recuperação de senha ',
       variables,
       templatePath,
     );
