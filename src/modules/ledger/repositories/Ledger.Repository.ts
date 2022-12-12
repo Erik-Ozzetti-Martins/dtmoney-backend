@@ -1,4 +1,4 @@
-import { LedgerDto } from 'dtos/LedgetDto';
+import { LedgerDto } from 'modules/ledger/dtos/LedgetDto';
 import { Ledger } from 'entities/Ledger';
 import { getRepository, Repository } from 'typeorm';
 import { ILedgerRepository } from './ILedger.Repository';
@@ -8,6 +8,7 @@ class LedgerRepository implements ILedgerRepository {
   constructor() {
     this.repository = getRepository(Ledger);
   }
+
   async create({
     type,
     title,

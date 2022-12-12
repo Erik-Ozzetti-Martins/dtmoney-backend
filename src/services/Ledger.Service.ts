@@ -2,7 +2,7 @@ import AppError from 'AppError';
 import { LedgerRepository } from 'repositories/Ledger.Repository';
 import UserRepository from 'repositories/User.Repository';
 import { getCustomRepository } from 'typeorm';
-import { LedgerDto } from '../dtos/LedgetDto';
+import { LedgerDto } from '../modules/ledger/dtos/LedgerDto';
 
 interface IRequest {
   type: string;

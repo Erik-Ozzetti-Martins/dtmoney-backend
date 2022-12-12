@@ -1,4 +1,4 @@
-import { LedgerDto } from 'dtos/LedgetDto';
+import { LedgerDto } from 'modules/ledger/dtos/LedgetDto';
 import { Ledger } from 'entities/Ledger';
 
 interface ILedgerRepository {

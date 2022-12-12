@@ -3,7 +3,7 @@ import 'express-async-errors';
 import 'database/';
 import cors from 'cors';
 import AppError from 'AppError';
-import indexRouter from 'routes/routerIndex';
+import indexRouter from 'shared/infra/http/routes/routes/routerIndex';
 
 const app = express();
 app.use(express.json());

@@ -6,16 +6,16 @@
   "keywords": [],
   "author": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "test": "jest",
+    "dev_old": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+    "lint-fix": "eslint . --ext .ts --fix"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/jest": "^29.2.4",
     "@types/joi": "^17.2.3",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/multer": "^1.4.7",
@@ -26,7 +26,9 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.2.0",
+    "jest": "^29.3.1",
     "prettier": "^2.3.2",
+    "prisma": "^4.7.1",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",
     "typescript": "^4.4.2"
@@ -46,7 +48,6 @@
     "nodemailer": "^6.7.3",
     "pg": "^8.7.1",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.45",
     "types": "^0.1.1",
     "uuid": "^8.3.2"
   }
