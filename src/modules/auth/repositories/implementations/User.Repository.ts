@@ -1,5 +1,4 @@
-import { User } from 'entities/User';
-
+import { Prisma } from '@prisma/client';
 
 class UserRepository extends Repository<User> {
   public async findByEmail(email: string): Promise<User | undefined> {
