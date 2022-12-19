@@ -9,19 +9,19 @@ services:
     volumes:
       - .:/app
     ports:  
-      - "3000:3000"
-    commmand: npm run dev
+      - "3333:3333"
+    command: npm run dev_old
     depends_on:
       - db
-
   db:
     image: postgres
+    container_name: postgres
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: "postgres"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - /postgresql/data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
