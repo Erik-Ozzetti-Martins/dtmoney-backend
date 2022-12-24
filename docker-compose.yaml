@@ -10,7 +10,7 @@ services:
       - .:/app
     ports:  
       - "3333:3333"
-    command: npm run dev_old
+    command: npm run dev
     depends_on:
       - db
   db:
