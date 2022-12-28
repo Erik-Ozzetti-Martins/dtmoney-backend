@@ -1,8 +1,8 @@
-import auth from '@config/auth';
+import auth from '@/config/auth';
 import { verify } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 
-import AppError from 'shared/errors/AppError';
+import AppError from '@/shared/errors/AppError';
 
 interface IPayload {
   sub: string;
@@ -17,7 +17,10 @@ export async function ensureAuthenticated(
   if (!authHeader) {
     throw new AppError('Token missing', 401);
   }
-  const token = authHeader.replace(/^Bearer\s(.)/, '$1');
+
+  const token = authHeader.match(/^Bearer\s(.)/)
+    ? authHeader.replace(/^Bearer\s(.)/, '$1')
+    : null;
 
   if (!token) {
     throw new AppError('Token missing', 401);
