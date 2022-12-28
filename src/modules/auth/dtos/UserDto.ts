@@ -1,4 +1,9 @@
-import { User } from 'entities/User';
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
 
 export class UserDto {
   id: string;
