@@ -1,13 +1,8 @@
-import { LedgerDto } from 'modules/ledger/dtos/LedgetDto';
-import { Ledger } from 'entities/Ledger';
+import { LedgerDto } from '../dtos/LedgerDto';
 
 interface ILedgerRepository {
-  create({
-    type,
-    title,
-    amount,
-    user_id,
-    category,
-  }: LedgerDto): Promise<Ledger>;
+  create(ledger: LedgerDto): Promise<LedgerDto>;
+
+  getAll(id: string): Promise<LedgerDto[]>;
 }
 export { ILedgerRepository };
