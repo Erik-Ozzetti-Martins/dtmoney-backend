@@ -1,8 +1,10 @@
-import { Prisma } from '@prisma/client';
+import { prisma } from '@/shared/infra/prisma';
+import { User } from '@/modules/auth/dtos/UserDto';
+import { IUserRepository } from '../IUser.Repository';
 
-class UserRepository extends Repository<User> {
+export class UserRepository implements IUserRepository {
   public async findByEmail(email: string): Promise<User | undefined> {
-    const user = await this.findOne({
+    const [user] = await prisma.user.findMany({
       where: {
         email,
       },
@@ -10,10 +12,35 @@ class UserRepository extends Repository<User> {
     return user;
   }
 
-  async findById(id: string): Promise<User> {
-    const user = await this.findOne(id);
+  async findById(id: string): Promise<User | undefined> {
+    const [user] = await prisma.user.findMany({
+      where: {
+        id,
+      },
+    });
     return user;
   }
-}
 
-export default UserRepository;
+  public async create({ email, name, password }: User): Promise<User> {
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        password,
+      },
+    });
+    return user;
+  }
+
+  public async update(user: User): Promise<User> {
+    const updatedUser = await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: user.password,
+      },
+    });
+    return updatedUser;
+  }
+}
