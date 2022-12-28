@@ -4,7 +4,7 @@ interface LedgerDto {
   title: string;
   amount: number;
   category: string;
-  user_id: string;
+  userId: string;
 }
 
 export { LedgerDto };
