@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-class DateJs {
+class DateJs implements IDateProvider {
   dateNow(): Date {
     return dayjs().toDate();
   }
@@ -19,3 +19,10 @@ class DateJs {
 }
 
 export { DateJs };
+
+export interface IDateProvider {
+  dateNow(): Date;
+  addHours(hours: number): Date;
+  compareIfBefore(start_date: Date, end_date: Date): boolean;
+  addDays(days: number): Date;
+}
