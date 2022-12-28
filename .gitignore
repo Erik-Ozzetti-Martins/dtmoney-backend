@@ -4,4 +4,6 @@ ormconfig.json
 yarn-error.log
 yarn.lock
 .env
+.env.development
+.env.testing
 coverage
