@@ -32,7 +32,7 @@ class RefreshTokenUseCase {
     const userToken = await this.usersTokensRepository.findByUserToken(token);
 
     if (!userToken) {
-      throw new AppError('Refresh token does not exists!', 401);
+      throw new AppError('Refresh token does not exists!');
     }
 
     await this.usersTokensRepository.deleteById(userToken.id);

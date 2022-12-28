@@ -1,4 +1,5 @@
 import { UsersTokensRepositoryInMemory } from '@/modules/auth/repositories/implementations/UsersTokens.Repository.InMemory';
+import AppError from '@/shared/errors/AppError';
 import { DateJs } from '@/utils/Date';
 import { RefreshTokenUseCase } from './RefreshToken.UseCase';
 
@@ -31,5 +32,13 @@ describe('Refresh Token Use Case', () => {
     );
     expect(response.token).toBeTruthy();
     expect(response.refresh_token).toBeTruthy();
+  });
+
+  it('should not be able to refresh a token with invalid token', async () => {
+    await expect(
+      refreshTokenUseCase.execute(
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RBQUBnbWFpbC5jb20iLCJpYXQiOjE2NzE5MTQ4NjMsImV4cCI6MTY3MzIxMDg2Mywic3ViIjoiNzUwNjZmMDYtODkxMS00Y2MwLWE5ZGMtZGI5NjQ2YWFkNjQwIn0.z9qStdm77sFQRh_040e6xlfbXXLH47vMWVCBzupEy34',
+      ),
+    ).rejects.toEqual(new AppError('Refresh token does not exists!'));
   });
 });

@@ -15,9 +15,10 @@ describe('Reset Password Controller', () => {
     const response = await request(app)
       .post('/api/v1/auth/refresh-token')
       .send({
-        refreshToken: 'dsdsdsdsdsad',
+        refreshToken:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RBQUBnbWFpbC5jb20iLCJpYXQiOjE2NzE5MTQ4NjMsImV4cCI6MTY3MzIxMDg2Mywic3ViIjoiNzUwNjZmMDYtODkxMS00Y2MwLWE5ZGMtZGI5NjQ2YWFkNjQwIn0.z9qStdm77sFQRh_040e6xlfbXXLH47vMWVCBzupEy34',
       });
 
-    expect(response.status).toBe(401);
+    expect(response.status).toBe(400);
   });
 });
