@@ -8,22 +8,29 @@ services:
       DB_PORT: 5432
     volumes:
       - .:/app
-    ports:  
-      - "3333:3333"
-    command: npm run dev
+    ports:
+      - '3333:3333'
+    command: npm run dev 
     depends_on:
       - db
+      - redis
+    links:
+      - "redis:redis"
+  redis:
+    image: redis:alpine
+    ports:
+      - '6379:6379'
   db:
     image: postgres
     container_name: postgres
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_PASSWORD: 'postgres'
     volumes:
       - /postgresql/data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - '5432:5432'
 
 volumes:
-  node_modules: {}   
+  node_modules: {}
