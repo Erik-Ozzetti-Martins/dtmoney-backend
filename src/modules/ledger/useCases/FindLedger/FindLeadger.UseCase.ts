@@ -9,9 +9,8 @@ class FindLedgerUseCase {
     private ledgerRepository: ILedgerRepository,
   ) {}
 
-  async execute(id: string): Promise<LedgerDto[]> {
-    const ledger = await this.ledgerRepository.getAll(id);
-
+  async execute(id: string, page: number, limit: number): Promise<LedgerDto[]> {
+    const ledger = await this.ledgerRepository.getAll(id, page, limit);
     return ledger;
   }
 }
