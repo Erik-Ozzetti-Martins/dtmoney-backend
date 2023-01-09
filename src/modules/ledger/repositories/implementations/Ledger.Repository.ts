@@ -24,7 +24,7 @@ class LedgerRepository implements ILedgerRepository {
 
   async getAll(id: string, page: number, limit: number): Promise<LedgerDto[]> {
     const ledgers = prisma.ledger.findMany({
-      skip: page * 10,
+      skip: (page - 1) * 10,
       take: limit,
       where: { userId: id },
     });
