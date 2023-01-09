@@ -10,7 +10,7 @@ describe('Create Ledger Controller', () => {
 
     const response = await request(app)
       .post('/api/v1/ledger/')
-      .set('Authorization', `Bearer ${signIn.body.token} `)
+      .set('Authorization', `Bearer ${signIn.body.token}`)
       .send({
         amount: 22.0,
         category: 'teste',
